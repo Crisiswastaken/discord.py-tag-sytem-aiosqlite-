@@ -1,4 +1,4 @@
-#==========ИМПОРТЫ==========#
+#==========IMPORTS==========#
 
 import discord
 from discord.ext import commands
@@ -28,7 +28,7 @@ from samp_client.client import SampClient
 import psutil
 import colorama
 
-#==========КОД==========#
+#==========CODE==========#
 
 class TagsCog(commands.Cog):
     def __init__(self, client):
@@ -110,11 +110,11 @@ class TagsCog(commands.Cog):
                 embed.description += f"Tag: {index} | Name: {tag_name}\n"
             await msg.edit(embed=embed)
 
-#==========ЗАГРУЗКА==========#
+#==========LOADING==========#
 
 def setup(client):      
     client.add_cog(TagsCog(client))
-    print("TagsCog - Загружен")
+    print("TagsCog - Loaded")
     print("---")
 
-#==========КОНЕЦ==========#
+#==========END==========#
