@@ -55,7 +55,7 @@ class TagsCog(commands.Cog):
     async def tag(self, ctx, tag_name):
         tagdb = await aiosqlite.connect("tagData.db")
 
-        async with tagdb.execute("SELECT user_added, tag_text FROM taggingData WHERE guild_id = ? AND tag_name = ? ORDER BY tag_text", (ctx.guild.id, tag_name)) as cursor:
+        async with tagdb.execute("SELECT user_added, tag_text FROM taggingData WHERE guild_id = ? AND tag_name = ?", (ctx.guild.id, tag_name)) as cursor:
             async for tagvar in cursor:
                 user_added, tag_text = tagvar
                 user_name = ctx.guild.get_member(user_added)
@@ -74,7 +74,7 @@ class TagsCog(commands.Cog):
         embed=discord.Embed(title=f"Tags {member.name}", description="", color=0x000000)
         embed.set_thumbnail(url=member.avatar_url)
         msg = await ctx.send(embed=embed)
-        async with tagdb.execute("SELECT tag_name, tag_text FROM taggingData WHERE guild_id = ? AND user_added = ? ORDER BY tag_text", (ctx.guild.id, member.id,)) as cursor:
+        async with tagdb.execute("SELECT tag_name, tag_text FROM taggingData WHERE guild_id = ? AND user_added = ?", (ctx.guild.id, member.id,)) as cursor:
             async for tagget, textget in cursor:
                 index += 1
                 tag_name = tagget
@@ -102,7 +102,7 @@ class TagsCog(commands.Cog):
         embed=discord.Embed(title=f"Tags {member.name}", description="", color=0x000000)
         embed.set_thumbnail(url=member.avatar_url)
         msg = await ctx.send(embed=embed)
-        async with tagdb.execute("SELECT tag_name, tag_text FROM taggingData WHERE guild_id = ? AND user_added = ? ORDER BY tag_text", (ctx.guild.id, member.id,)) as cursor:
+        async with tagdb.execute("SELECT tag_name, tag_text FROM taggingData WHERE guild_id = ? AND user_added = ?", (ctx.guild.id, member.id,)) as cursor:
             async for tagget, textget in cursor:
                 index += 1
                 tag_name = tagget
