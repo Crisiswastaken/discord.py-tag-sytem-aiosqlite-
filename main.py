@@ -70,7 +70,7 @@ for filename in os.listdir('./cogs'):
 async def taginit():
     await client.wait_until_ready()
     tagdb = await aiosqlite.connect("tagData.db")
-    await tagdb.execute("CREATE TABLE IF NOT EXISTS taggingData (guild_id int, user_added int, tag_name text, tag_text text, PRIMARY KEY (tag_name, tag_text))")
+    await tagdb.execute("CREATE TABLE IF NOT EXISTS taggingData (guild_id int, user_added int, tag_name text, tag_text text, PRIMARY KEY (tag_name))")
     await tagdb.commit()
 
 #==========CODE==========#
