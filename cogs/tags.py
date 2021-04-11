@@ -42,7 +42,7 @@ class TagsCog(commands.Cog):
     @commands.guild_only()
     async def addtag(self, ctx, tag_name, *, tag_text):
         tagdb = await aiosqlite.connect("tagData.db")
-        await tagdb.execute("INSERT INTO taggingData (guild_id, user_added, tag_name, tag_text) VALUES (?,?,?,?)", (ctx.guild.id, ctx.author.id, tag_name, tag_text))
+        await tagdb.execute("INSERT OR ROLLBACK INTO taggingData (guild_id, user_added, tag_name, tag_text) VALUES (?,?,?,?)", (ctx.guild.id, ctx.author.id, tag_name, tag_text))
         await tagdb.commit()
         embed=discord.Embed(title=".addtag", color=0x000000)
         embed.add_field(name="Status:", value="Added", inline=False)
